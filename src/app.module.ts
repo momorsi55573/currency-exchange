@@ -5,6 +5,7 @@ import { UserModule } from './user/user.module';
 import { DbModule } from './db/db.module';
 import { ConfigModule } from '@nestjs/config';
 import { HttpModule } from '@nestjs/axios';
+import { CacheModule } from '@nestjs/cache-manager';
 
 @Module({
   imports: [HttpModule.registerAsync({
@@ -12,7 +13,7 @@ import { HttpModule } from '@nestjs/axios';
       timeout: 5000,
       maxRedirects: 5,
     }),
-  }), UserModule, DbModule, ConfigModule.forRoot({isGlobal: true})],
+  }), CacheModule.register(), UserModule, DbModule, ConfigModule.forRoot({isGlobal: true})],
   controllers: [AppController],
   providers: [AppService],
 })
