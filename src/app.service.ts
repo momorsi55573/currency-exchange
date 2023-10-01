@@ -4,7 +4,7 @@ import { HttpService } from '@nestjs/axios';
 import { ConfigService } from '@nestjs/config';
 import { DbService } from './db/db.service';
 import { Transaction } from '@prisma/client';
-import { lastValueFrom } from 'rxjs';
+import { firstValueFrom } from 'rxjs';
 
 @Injectable()
 export class AppService {
@@ -13,7 +13,7 @@ export class AppService {
   async convert(dto: ConvertDto, userId: string): Promise<Transaction> {
   try {
     const api_key = this.config.get('API_KEY')
-    const response = await lastValueFrom(
+    const response = await firstValueFrom(
     this.httpService.get(`https://exchange-rates.abstractapi.com/v1/live?api_key=${api_key}&base=${dto.base}&target=${dto.target}`)) 
     const amount = dto.amount
     const convertedAmount = Object.values( response.data.exchange_rates )[0] as number * amount
