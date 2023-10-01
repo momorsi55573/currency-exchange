@@ -5,7 +5,8 @@ import { UserModule } from './user/user.module';
 import { DbModule } from './db/db.module';
 import { ConfigModule } from '@nestjs/config';
 import { HttpModule } from '@nestjs/axios';
-import { CacheModule } from '@nestjs/cache-manager';
+import { CacheInterceptor, CacheModule } from '@nestjs/cache-manager';
+import { APP_INTERCEPTOR } from '@nestjs/core';
 
 @Module({
   imports: [HttpModule.registerAsync({
@@ -13,8 +14,11 @@ import { CacheModule } from '@nestjs/cache-manager';
       timeout: 5000,
       maxRedirects: 5,
     }),
-  }), CacheModule.register(), UserModule, DbModule, ConfigModule.forRoot({isGlobal: true})],
+  }),  CacheModule.register(), UserModule, DbModule, ConfigModule.forRoot({isGlobal: true})],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [AppService, {
+    provide: APP_INTERCEPTOR,
+    useClass: CacheInterceptor,
+  }],
 })
 export class AppModule {}

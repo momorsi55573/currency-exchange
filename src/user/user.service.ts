@@ -34,7 +34,6 @@ export class UserService {
     
   }
 
-
  async signupLocal(dto: AuthDto): Promise<{access_token: string}> {
     try{
         const hash = await argon.hash(dto.password);
