@@ -1,4 +1,4 @@
-import { AuthDto } from 'src/utils/dto';
+import { AuthDto } from 'src/utils/dtos';
 import { UserService } from './user.service';
 import { Body, Controller, Get, HttpCode, HttpStatus, Post, UseGuards } from '@nestjs/common';
 import { GetUser } from 'src/utils/decorators';

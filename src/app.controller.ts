@@ -1,6 +1,6 @@
 import { Body, Controller, Post, UseGuards } from '@nestjs/common';
 import { AppService } from './app.service';
-import { ConvertDto } from './utils/dto';
+import { ConvertDto } from './utils/dtos';
 import { GetUser } from './utils/decorators';
 import { JwtGuard } from './utils/guards';
 import { Transaction } from '@prisma/client';

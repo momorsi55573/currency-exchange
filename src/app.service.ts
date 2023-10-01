@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { ConvertDto } from './utils/dto';
+import { ConvertDto } from './utils/dtos';
 import { HttpService } from '@nestjs/axios';
 import { ConfigService } from '@nestjs/config';
 import { DbService } from './db/db.service';
